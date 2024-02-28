@@ -9,6 +9,15 @@ function App() {
     projects: [],
   });
 
+  const handleCancelAddProject = () => {
+    setProjectList((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectID: undefined,
+      };
+    });
+  };
+
   const projectListHandler = () => {
     setProjectList((prevState) => {
       return {
@@ -32,7 +41,12 @@ function App() {
   let content;
 
   if (projectList.selectedProjectID === null) {
-    content = <NewProject onNewProject={addProjectHandler} />;
+    content = (
+      <NewProject
+        onNewProject={addProjectHandler}
+        onCancel={handleCancelAddProject}
+      />
+    );
   } else if (projectList.selectedProjectID === undefined) {
     content = <NoProjectScreen onNewProject={projectListHandler} />;
   }
