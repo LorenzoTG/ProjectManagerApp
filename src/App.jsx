@@ -9,7 +9,16 @@ function App() {
     projects: [],
   });
 
-  const handleCancelAddProject = () => {
+  const selectProjectHandler = (id) => {
+    setProjectList((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectID: id,
+      };
+    });
+  };
+
+  const cancelAddProjectHandler = () => {
     setProjectList((prevState) => {
       return {
         ...prevState,
@@ -44,7 +53,7 @@ function App() {
     content = (
       <NewProject
         onNewProject={addProjectHandler}
-        onCancel={handleCancelAddProject}
+        onCancel={cancelAddProjectHandler}
       />
     );
   } else if (projectList.selectedProjectID === undefined) {
@@ -56,6 +65,7 @@ function App() {
       <ProjectsSidebar
         projects={projectList.projects}
         onNewProject={projectListHandler}
+        onProjectSelected={selectProjectHandler}
       />
       {content}
     </main>
