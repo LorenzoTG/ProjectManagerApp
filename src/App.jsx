@@ -25,7 +25,16 @@ function App() {
     });
   };
 
-  const deleteTaskHandler = () => {};
+  const deleteTaskHandler = (id) => {
+    setProjectList((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => {
+          return task.id !== id;
+        }),
+      };
+    });
+  };
 
   const deleteProjectHandler = () => {
     setProjectList((prevState) => {
@@ -86,6 +95,7 @@ function App() {
       onDelete={deleteProjectHandler}
       onAddTask={addTaskHandler}
       tasks={projectList.tasks}
+      onDeleteTask={deleteTaskHandler}
     ></SelectedProject>
   );
 
@@ -106,6 +116,7 @@ function App() {
         projects={projectList.projects}
         onNewProject={projectListHandler}
         onProjectSelected={selectProjectHandler}
+        selectedProjectID={projectList.selectedProjectID}
       />
       {content}
     </main>
